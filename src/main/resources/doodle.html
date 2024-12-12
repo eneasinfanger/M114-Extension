@@ -1,0 +1,1346 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
+}
+
+.letter {
+	width: 150px;
+	height: 150px;
+	position: relative;
+	cursor: pointer;
+}
+
+.character {
+	transform-origin: center bottom;
+	animation: bounce 1.5s ease-in-out infinite;
+}
+
+.body-group {
+	filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.1));
+}
+
+.letter-body {
+	fill: #4285f4;
+}
+
+.eyes {
+	animation: blink 3s infinite;
+	transform-origin: center;
+}
+
+.pupil {
+	animation: lookAround 4s infinite;
+	transform-origin: center;
+}
+
+.arm {
+	transform-origin: center 20%;
+	animation: swing 2s ease-in-out infinite;
+}
+
+.leg {
+	transform-origin: top center;
+	animation: waddle 2s infinite alternate ease-in-out;
+}
+
+.right-leg {
+	animation-delay: -1s;
+}
+
+@keyframes bounce {
+	0%,
+	100% {
+		transform: translateY(0) scaleY(1) scaleX(1);
+	}
+	30% {
+		transform: translateY(-20px) scaleY(1.1) scaleX(0.9);
+	}
+	60% {
+		transform: translateY(5px) scaleY(0.9) scaleX(1.1);
+	}
+}
+
+@keyframes blink {
+	0%,
+	48%,
+	52%,
+	100% {
+		transform: scaleY(1);
+	}
+	50% {
+		transform: scaleY(0.1);
+	}
+}
+
+@keyframes lookAround {
+	0%,
+	100% {
+		transform: translate(0, 0);
+	}
+	25% {
+		transform: translate(2px, -1px);
+	}
+	75% {
+		transform: translate(-2px, 1px);
+	}
+}
+
+@keyframes swing {
+	0%,
+	100% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(15deg);
+	}
+	75% {
+		transform: rotate(-15deg);
+	}
+}
+
+@keyframes waddle {
+	0% {
+		transform: rotate(-2deg) translateY(0);
+	}
+	100% {
+		transform: rotate(2deg) translateY(-0.5px);
+	}
+}
+
+.letter:hover .character {
+	animation: excited 0.5s infinite;
+}
+
+@keyframes excited {
+	0%,
+	100% {
+		transform: scale(1) rotate(-3deg);
+	}
+	50% {
+		transform: scale(1.1) rotate(3deg);
+	}
+}
+
+/* Keep original animations for O */
+/* New animations for H */
+@keyframes spinH {
+	0% {
+		transform: rotateY(0deg);
+	}
+	100% {
+		transform: rotateY(360deg);
+	}
+}
+
+.h-character {
+	animation: spinH 2s infinite alternate ease-in-out;
+}
+
+/* New animations for L */
+@keyframes pulseL {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.1);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+.l-character {
+	animation: pulseL 3s infinite ease-in-out;
+}
+
+/* New animations for A */
+@keyframes shakeA {
+	0%,
+	100% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(-5deg);
+	}
+	75% {
+		transform: rotate(5deg);
+	}
+}
+
+.a-character {
+	animation: shakeA 4s infinite ease-in-out;
+}
+
+/* Unique leg animations */
+.h-leg {
+	animation: hLegMove 1.5s infinite alternate ease-in-out;
+}
+
+.l-leg {
+	animation: lLegMove 2s infinite alternate ease-in-out;
+}
+
+.a-leg {
+	animation: aLegMove 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes hLegMove {
+	0% {
+		transform: rotate(-3deg) translateX(-2px);
+	}
+	100% {
+		transform: rotate(3deg) translateX(2px);
+	}
+}
+
+@keyframes lLegMove {
+	0% {
+		transform: translateY(0) rotate(-2deg);
+	}
+	100% {
+		transform: translateY(-3px) rotate(2deg);
+	}
+}
+
+@keyframes aLegMove {
+	0% {
+		transform: skewX(-2deg) translateY(-1px);
+	}
+	100% {
+		transform: skewX(2deg) translateY(1px);
+	}
+}
+
+/* Option Set 2 */
+@keyframes bounceH {
+	0% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-15px) rotate(5deg);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
+@keyframes swayL {
+	0% {
+		transform: rotate(-8deg);
+	}
+	100% {
+		transform: rotate(8deg);
+	}
+}
+
+@keyframes hopA {
+	0% {
+		transform: translateY(0) scale(1);
+	}
+	50% {
+		transform: translateY(-10px) scale(0.95);
+	}
+	100% {
+		transform: translateY(0) scale(1);
+	}
+}
+
+/* Option Set 3 */
+@keyframes danceH {
+	0% {
+		transform: translateX(0) rotate(0);
+	}
+	25% {
+		transform: translateX(-5px) rotate(-5deg);
+	}
+	75% {
+		transform: translateX(5px) rotate(5deg);
+	}
+	100% {
+		transform: translateX(0) rotate(0);
+	}
+}
+
+@keyframes waveL {
+	0% {
+		transform: skewX(0) translateY(0);
+	}
+	25% {
+		transform: skewX(5deg) translateY(-5px);
+	}
+	75% {
+		transform: skewX(-5deg) translateY(5px);
+	}
+	100% {
+		transform: skewX(0) translateY(0);
+	}
+}
+
+@keyframes jumpA {
+	0% {
+		transform: scale(1) translateY(0);
+	}
+	40% {
+		transform: scale(0.9) translateY(-20px);
+	}
+	60% {
+		transform: scale(1.1) translateY(-25px);
+	}
+	100% {
+		transform: scale(1) translateY(0);
+	}
+}
+
+/* Option 1: Playful Wobble */
+@keyframes wobbleH {
+	0% {
+		transform: rotate(0deg) translateX(0);
+	}
+	25% {
+		transform: rotate(-3deg) translateX(-3px) scaleY(0.97);
+	}
+	75% {
+		transform: rotate(3deg) translateX(3px) scaleY(1.03);
+	}
+	100% {
+		transform: rotate(0deg) translateX(0);
+	}
+}
+
+/* Option 2: Elastic Bounce */
+@keyframes elasticH {
+	0% {
+		transform: scaleY(1);
+	}
+	30% {
+		transform: scaleY(0.93) scaleX(1.05);
+	}
+	60% {
+		transform: scaleY(1.07) scaleX(0.95);
+	}
+	100% {
+		transform: scaleY(1);
+	}
+}
+
+/* Option 3: Jelly Shake */
+@keyframes jellyH {
+	0%,
+	100% {
+		transform: skewX(0) skewY(0);
+	}
+	25% {
+		transform: skewX(-3deg) skewY(1deg);
+	}
+	75% {
+		transform: skewX(3deg) skewY(-1deg);
+	}
+}
+
+/* Option 4: Pop Dance */
+@keyframes popH {
+	0% {
+		transform: translateY(0) scale(1);
+	}
+	30% {
+		transform: translateY(-10px) scale(1.1, 0.9);
+	}
+	50% {
+		transform: translateY(-15px) scale(0.95, 1.05);
+	}
+	75% {
+		transform: translateY(-5px) scale(1.05, 0.95);
+	}
+	100% {
+		transform: translateY(0) scale(1);
+	}
+}
+
+.control-panel {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: white;
+	padding: 20px;
+	box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+	font-family: "Google Sans", Arial, sans-serif;
+	z-index: 1000;
+	max-height: 180px;
+	overflow-y: auto;
+}
+
+.letter-select {
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+.letter-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+	margin-bottom: 20px;
+}
+
+.letter-btn {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	font-size: 18px;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.letter-btn[data-letter="H"] {
+	background: #db4437;
+	color: white;
+}
+.letter-btn[data-letter="O"] {
+	background: #4285f4;
+	color: white;
+}
+.letter-btn[data-letter="L"] {
+	background: #0f9d58;
+	color: white;
+}
+.letter-btn[data-letter="A"] {
+	background: #f4b400;
+	color: white;
+}
+
+.modification-panel {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 20px;
+	padding: 15px;
+	background: #f8f9fa;
+	border-radius: 8px;
+}
+
+.color-controls {
+	display: flex;
+	gap: 15px;
+	justify-content: center;
+}
+
+.color-picker-group {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
+}
+
+.color-picker {
+	width: 50px;
+	height: 50px;
+	padding: 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.animation-select {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 16px;
+}
+
+.group-animation {
+	text-align: center;
+	margin-top: 15px;
+}
+
+.group-btn {
+	background: linear-gradient(45deg, #4285f4, #34a853, #fbbc05, #ea4335);
+	background-size: 300% 300%;
+	animation: gradientShift 2s infinite linear;
+	color: white;
+	font-weight: bold;
+	transition: all 0.3s ease;
+}
+
+@keyframes gradientShift {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.group-btn:not(:disabled):hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 15px rgba(66, 133, 244, 0.4);
+}
+
+.group-btn:disabled {
+	opacity: 0.8;
+	cursor: not-allowed;
+	animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 0.8;
+	}
+	50% {
+		opacity: 0.6;
+	}
+}
+
+/* Add hover effect */
+.group-btn:not(:disabled):hover {
+	background: #3367d6;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Add click effect */
+.group-btn:not(:disabled):active {
+	transform: translateY(0);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Add all animation keyframes */
+@keyframes bounce {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-20px);
+	}
+}
+
+@keyframes shake {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	25% {
+		transform: translateX(-10px);
+	}
+	75% {
+		transform: translateX(10px);
+	}
+}
+
+/* Add more animation keyframes for each animation in the list */
+
+/* Animation classes */
+.anim-bounce {
+	animation: bounce 2s infinite;
+}
+.anim-shake {
+	animation: shake 2s infinite;
+}
+/* Add classes for all animations */
+
+/* New gentle default animation for H */
+@keyframes defaultH {
+	0%,
+	100% {
+		transform: translateY(0) scaleY(1);
+	}
+	30% {
+		transform: translateY(-12px) scaleY(1.03);
+	}
+	40% {
+		transform: translateY(-12px) scaleY(1);
+	}
+	55% {
+		transform: translateY(0) scaleY(0.97);
+	}
+	70% {
+		transform: translateY(0) scaleY(1);
+	}
+}
+
+/* Apply this animation to H by default */
+svg#H {
+	animation: defaultH 2.5s infinite ease-in-out;
+	transform-origin: center bottom;
+}
+
+/* Reset any inherited animations or transformations */
+svg#H * {
+	transform: none !important;
+}
+
+/* Container for the alphabets */
+.letters-container {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 200px; /* Space for control panel */
+}
+
+/* Add this to your existing CSS - hover effect for H */
+svg#H:hover {
+	animation: excited 0.5s ease-in-out infinite !important;
+}
+
+/* Add this if the excited keyframes aren't already defined */
+@keyframes excited {
+	0%,
+	100% {
+		transform: scale(1.1) translateY(-5px);
+	}
+	50% {
+		transform: scale(1.15) translateY(-7px);
+	}
+}
+    </style>
+</head>
+<body>
+<div class="letters-container">
+    <!-- H Character -->
+    <svg id="H" class="letter" viewBox="0 0 150 150">
+        <defs>
+            <linearGradient id="hBodyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#FF7BAC"/>
+                <stop offset="100%" style="stop-color:#FF5C95"/>
+            </linearGradient>
+            <linearGradient id="hHighlightGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:rgba(255,255,255,0.2)"/>
+                <stop offset="100%" style="stop-color:rgba(255,255,255,0)"/>
+            </linearGradient>
+        </defs>
+
+        <g class="character h-character">
+            <!-- Shadow -->
+            <ellipse cx="75" cy="140" rx="25" ry="5" fill="rgba(0,0,0,0.1)" filter="blur(3px)"/>
+
+            <!-- Body -->
+            <g class="body-group">
+                <!-- Left vertical bar -->
+                <path class="letter-body" d="M45,30
+                             C55,30 65,35 65,50
+                             L65,100
+                             C65,115 55,120 45,120
+                             C35,120 25,115 25,100
+                             L25,50
+                             C25,35 35,30 45,30Z" fill="url(#hBodyGradient)"/>
+
+                <!-- Right vertical bar -->
+                <path class="letter-body" d="M105,30
+                             C115,30 125,35 125,50
+                             L125,100
+                             C125,115 115,120 105,120
+                             C95,120 85,115 85,100
+                             L85,50
+                             C85,35 95,30 105,30Z" fill="url(#hBodyGradient)"/>
+
+                <!-- Middle connector -->
+                <path class="letter-body" d="M65,65
+                             L85,65
+                             C95,65 95,85 85,85
+                             L65,85
+                             C55,85 55,65 65,65Z" fill="url(#hBodyGradient)"/>
+
+                <!-- Highlights -->
+                <path d="M35,40 C45,35 55,35 60,40 C55,35 35,35 35,40Z" fill="url(#hHighlightGradient)"/>
+                <path d="M95,40 C105,35 115,35 120,40 C115,35 95,35 95,40Z" fill="url(#hHighlightGradient)"/>
+            </g>
+
+            <!-- Face -->
+            <g class="face">
+                <!-- Eyes -->
+                <g class="eyes">
+                    <circle cx="45" cy="50" r="8" fill="white"/>
+                    <circle class="pupil" cx="47" cy="50" r="4" fill="#333"/>
+
+                    <circle cx="105" cy="50" r="8" fill="white"/>
+                    <circle class="pupil" cx="107" cy="50" r="4" fill="#333"/>
+                </g>
+
+                <!-- Cheeks -->
+                <circle cx="40" cy="65" r="4" fill="rgba(255,182,193,0.4)"/>
+                <circle cx="110" cy="65" r="4" fill="rgba(255,182,193,0.4)"/>
+
+                <!-- Mouth -->
+                <path d="M70,75 Q75,80 80,75" fill="none" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+            </g>
+
+            <!-- Legs -->
+            <g class="legs h-leg">
+                <path class="leg" d="M45,115 Q40,130 45,140" stroke="url(#hBodyGradient)" stroke-width="15"
+                      stroke-linecap="round" fill="none"/>
+
+                <path class="leg right-leg" d="M105,115 Q110,130 105,140" stroke="url(#hBodyGradient)" stroke-width="15"
+                      stroke-linecap="round" fill="none"/>
+            </g>
+        </g>
+    </svg>
+
+    <!-- Existing O Character SVG remains unchanged -->
+    <svg id="O" class="letter" viewBox="0 0 150 150">
+        <defs>
+            <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#4285F4"/>
+                <stop offset="100%" style="stop-color:#3367D6"/>
+            </linearGradient>
+
+            <!-- Highlight gradient -->
+            <linearGradient id="highlightGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:rgba(255,255,255,0.2)"/>
+                <stop offset="100%" style="stop-color:rgba(255,255,255,0)"/>
+            </linearGradient>
+        </defs>
+
+        <g class="character">
+            <!-- Shadow -->
+            <ellipse cx="75" cy="140" rx="25" ry="5" fill="rgba(0,0,0,0.1)" filter="blur(3px)"/>
+
+            <!-- Body -->
+            <g class="body-group">
+                <path class="letter-body" d="M75,30
+                             C105,30 120,45 120,75
+                             C120,105 105,120 75,120
+                             C45,120 30,105 30,75
+                             C30,45 45,30 75,30Z" fill="url(#bodyGradient)"/>
+
+                <!-- Highlight -->
+                <path d="M45,40
+                            C60,35 90,35 105,40
+                            C95,35 55,35 45,40Z" fill="url(#highlightGradient)"/>
+            </g>
+
+            <!-- Face -->
+            <g class="face">
+                <!-- Eyes -->
+                <g class="eyes">
+                    <circle cx="60" cy="65" r="10" fill="white"/>
+                    <circle class="pupil" cx="62" cy="65" r="5" fill="#333"/>
+
+                    <circle cx="90" cy="65" r="10" fill="white"/>
+                    <circle class="pupil" cx="92" cy="65" r="5" fill="#333"/>
+                </g>
+
+                <!-- Cheeks -->
+                <circle cx="55" cy="80" r="5" fill="rgba(255,182,193,0.4)"/>
+                <circle cx="95" cy="80" r="5" fill="rgba(255,182,193,0.4)"/>
+
+                <!-- Mouth -->
+                <path d="M65,85 Q75,95 85,85" fill="none" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+            </g>
+
+            <!-- Arms -->
+            <g class="arms">
+                <path class="arm" d="M40,75 Q30,85 35,100" stroke="url(#bodyGradient)" stroke-width="15"
+                      stroke-linecap="round" fill="none"/>
+
+                <path class="arm" d="M110,75 Q120,85 115,100" stroke="url(#bodyGradient)" stroke-width="15"
+                      stroke-linecap="round" fill="none"/>
+            </g>
+
+            <!-- Legs -->
+            <g class="legs">
+                <path class="leg" d="M60,115 Q55,130 60,140" stroke="url(#bodyGradient)" stroke-width="15"
+                      stroke-linecap="round" fill="none"/>
+
+                <path class="leg right-leg" d="M90,115 Q95,130 90,140" stroke="url(#bodyGradient)" stroke-width="15"
+                      stroke-linecap="round" fill="none"/>
+            </g>
+        </g>
+    </svg>
+
+    <!-- L Character -->
+    <svg id="L" class="letter" viewBox="0 0 150 150">
+        <defs>
+            <linearGradient id="lBodyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#9D88FF"/>
+                <stop offset="100%" style="stop-color:#8670FF"/>
+            </linearGradient>
+            <linearGradient id="lHighlightGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:rgba(255,255,255,0.2)"/>
+                <stop offset="100%" style="stop-color:rgba(255,255,255,0)"/>
+            </linearGradient>
+        </defs>
+
+        <g class="character l-character">
+            <!-- Shadow -->
+            <ellipse cx="75" cy="140" rx="25" ry="5" fill="rgba(0,0,0,0.1)" filter="blur(3px)"/>
+
+            <!-- Body -->
+            <g class="body-group">
+                <!-- Vertical bar -->
+                <path class="letter-body" d="M45,30
+                             C55,30 65,35 65,50
+                             L65,100
+                             C65,115 55,120 45,120
+                             C35,120 25,115 25,100
+                             L25,50
+                             C25,35 35,30 45,30Z" fill="url(#lBodyGradient)"/>
+
+                <!-- Horizontal bar -->
+                <path class="letter-body" d="M45,100
+                             L95,100
+                             C110,100 115,110 115,120
+                             C115,130 110,140 95,140
+                             L45,140
+                             C60,140 65,120 45,100Z" fill="url(#lBodyGradient)"/>
+
+                <!-- Highlight -->
+                <path d="M35,40 C45,35 55,35 60,40 C55,35 35,35 35,40Z" fill="url(#lHighlightGradient)"/>
+            </g>
+
+            <!-- Face -->
+            <g class="face">
+                <!-- Eyes -->
+                <g class="eyes">
+                    <circle cx="45" cy="50" r="8" fill="white"/>
+                    <circle class="pupil" cx="47" cy="50" r="4" fill="#333"/>
+                </g>
+
+                <!-- Cheeks -->
+                <circle cx="40" cy="65" r="4" fill="rgba(255,182,193,0.4)"/>
+
+                <!-- Mouth -->
+                <path d="M35,75 Q45,80 55,75" fill="none" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+            </g>
+
+            <!-- Legs -->
+            <g class="legs l-leg">
+                <path class="leg" d="M45,115 Q40,130 45,140" stroke="url(#lBodyGradient)" stroke-width="15"
+                      stroke-linecap="round" fill="none"/>
+
+                <path class="leg right-leg" d="M85,115 Q90,130 85,140" stroke="url(#lBodyGradient)" stroke-width="15"
+                      stroke-linecap="round" fill="none"/>
+            </g>
+        </g>
+    </svg>
+
+    <!-- A Character -->
+    <svg id="A" class="letter" viewBox="0 0 150 150">
+        <defs>
+            <linearGradient id="aBodyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#FF9B6A"/>
+                <stop offset="100%" style="stop-color:#FF855A"/>
+            </linearGradient>
+            <linearGradient id="aHighlightGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:rgba(255,255,255,0.2)"/>
+                <stop offset="100%" style="stop-color:rgba(255,255,255,0)"/>
+            </linearGradient>
+        </defs>
+
+        <g class="character a-character">
+            <!-- Shadow -->
+            <ellipse cx="75" cy="140" rx="25" ry="5" fill="rgba(0,0,0,0.1)" filter="blur(3px)"/>
+
+            <!-- Body -->
+            <g class="body-group">
+                <!-- Left diagonal -->
+                <path class="letter-body" d="M45,120
+                             C35,120 25,115 25,100
+                             L55,30
+                             C60,20 70,20 75,30
+                             L75,100
+                             C75,115 65,120 55,120
+                             Z" fill="url(#aBodyGradient)"/>
+
+                <!-- Right diagonal -->
+                <path class="letter-body" d="M105,120
+                             C115,120 125,115 125,100
+                             L95,30
+                             C90,20 80,20 75,30
+                             L75,100
+                             C75,115 85,120 95,120
+                             Z" fill="url(#aBodyGradient)"/>
+
+                <!-- Middle bar -->
+                <path class="letter-body" d="M55,70
+                             L95,70
+                             C105,70 105,85 95,85
+                             L55,85
+                             C45,85 45,70 55,70Z" fill="url(#aBodyGradient)"/>
+
+                <!-- Highlights -->
+                <path d="M45,40 C55,35 65,35 70,40 C65,35 45,35 45,40Z" fill="url(#aHighlightGradient)"/>
+                <path d="M80,40 C90,35 100,35 105,40 C100,35 80,35 80,40Z" fill="url(#aHighlightGradient)"/>
+            </g>
+
+            <!-- Face -->
+            <g class="face">
+                <!-- Eyes -->
+                <g class="eyes">
+                    <circle cx="60" cy="50" r="8" fill="white"/>
+                    <circle class="pupil" cx="62" cy="50" r="4" fill="#333"/>
+
+                    <circle cx="90" cy="50" r="8" fill="white"/>
+                    <circle class="pupil" cx="92" cy="50" r="4" fill="#333"/>
+                </g>
+
+                <!-- Cheeks -->
+                <circle cx="55" cy="65" r="4" fill="rgba(255,182,193,0.4)"/>
+                <circle cx="95" cy="65" r="4" fill="rgba(255,182,193,0.4)"/>
+
+                <!-- Mouth -->
+                <path d="M70,75 Q75,80 80,75" fill="none" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+            </g>
+
+            <!-- Legs -->
+            <g class="legs a-leg">
+                <path class="leg" d="M60,115 Q55,130 60,140" stroke="url(#aBodyGradient)" stroke-width="15"
+                      stroke-linecap="round" fill="none"/>
+
+                <path class="leg right-leg" d="M90,115 Q95,130 90,140" stroke="url(#aBodyGradient)" stroke-width="15"
+                      stroke-linecap="round" fill="none"/>
+            </g>
+        </g>
+    </svg>
+</div>
+<div class="control-panel">
+    <!-- Alphabet Selection -->
+    <div class="letter-select">
+        <h3>Select Letter to Modify</h3>
+        <div class="letter-buttons">
+            <button class="letter-btn" data-letter="H">H</button>
+            <button class="letter-btn" data-letter="O">O</button>
+            <button class="letter-btn" data-letter="L">L</button>
+            <button class="letter-btn" data-letter="A">A</button>
+        </div>
+    </div>
+
+    <!-- Modification Options (initially hidden) -->
+    <div class="modification-panel" style="display: none;">
+        <div class="color-controls">
+            <div class="color-picker-group">
+                <label>Body Color</label>
+                <input type="color" class="color-picker" data-target="body">
+            </div>
+            <div class="color-picker-group">
+                <label>Arms Color</label>
+                <input type="color" class="color-picker" data-target="arms">
+            </div>
+            <div class="color-picker-group">
+                <label>Legs Color</label>
+                <input type="color" class="color-picker" data-target="legs">
+            </div>
+        </div>
+
+        <div class="animation-control">
+            <label>Select Animation</label>
+            <select class="animation-select">
+                <option value="">Choose Animation</option>
+                <!-- Animation options will be added via JavaScript -->
+            </select>
+        </div>
+    </div>
+
+    <!-- Group Animation Control -->
+    <div class="group-animation">
+        <button class="group-btn">Play Group Animation</button>
+    </div>
+</div>
+<script>
+    let selectedLetter = null;
+
+document.addEventListener("DOMContentLoaded", () => {
+	const letterButtons = document.querySelectorAll(".letter-btn");
+	const modificationPanel = document.querySelector(".modification-panel");
+	const colorPickers = document.querySelectorAll(".color-picker");
+	const animationSelect = document.querySelector(".animation-select");
+
+	// Letter button click handlers
+	letterButtons.forEach((btn) => {
+		btn.addEventListener("click", () => {
+			selectedLetter = btn.dataset.letter;
+			modificationPanel.style.display = "block";
+			highlightSelectedLetter(btn);
+		});
+	});
+
+	// Color picker change handlers
+	colorPickers.forEach((picker) => {
+		picker.addEventListener("input", (e) => {
+			if (!selectedLetter) return;
+
+			const target = e.target.dataset.target;
+			const letterSvg = document.querySelector(`svg[id="${selectedLetter}"]`);
+
+			switch (target) {
+				case "body":
+					// Update main body paths
+					letterSvg.querySelectorAll(".letter-body").forEach((path) => {
+						path.style.fill = e.target.value;
+					});
+					break;
+				case "arms":
+					// Update arms
+					letterSvg.querySelectorAll(".arm").forEach((arm) => {
+						arm.style.stroke = e.target.value;
+					});
+					break;
+				case "legs":
+					// Update legs
+					letterSvg.querySelectorAll(".leg").forEach((leg) => {
+						leg.style.stroke = e.target.value;
+						leg.style.fill = e.target.value;
+					});
+					break;
+			}
+		});
+	});
+
+	// Animation definitions
+	const animations = {
+		bounce: {
+			keyframes: `
+                    @keyframes bounce {
+                        0%, 100% { transform: translateY(0); }
+                        50% { transform: translateY(-20px); }
+                    }
+                `,
+			duration: "2s"
+		},
+		shake: {
+			keyframes: `
+                    @keyframes shake {
+                        0%, 100% { transform: translateX(0); }
+                        25% { transform: translateX(-10px); }
+                        75% { transform: translateX(10px); }
+                    }
+                `,
+			duration: "0.8s"
+		},
+		wobble: {
+			keyframes: `
+                    @keyframes wobble {
+                        0%, 100% { transform: rotate(0); }
+                        25% { transform: rotate(-5deg); }
+                        75% { transform: rotate(5deg); }
+                    }
+                `,
+			duration: "1.5s"
+		},
+		pulse: {
+			keyframes: `
+                    @keyframes pulse {
+                        0%, 100% { transform: scale(1); }
+                        50% { transform: scale(1.1); }
+                    }
+                `,
+			duration: "1.5s"
+		},
+		spin: {
+			keyframes: `
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                `,
+			duration: "3s"
+		},
+		flip: {
+			keyframes: `
+                    @keyframes flip {
+                        0% { transform: perspective(400px) rotateY(0); }
+                        100% { transform: perspective(400px) rotateY(360deg); }
+                    }
+                `,
+			duration: "2s"
+		},
+		tada: {
+			keyframes: `
+                    @keyframes tada {
+                        0% { transform: scale(1) rotate(0); }
+                        10%, 20% { transform: scale(0.9) rotate(-3deg); }
+                        30%, 50%, 70%, 90% { transform: scale(1.1) rotate(3deg); }
+                        40%, 60%, 80% { transform: scale(1.1) rotate(-3deg); }
+                        100% { transform: scale(1) rotate(0); }
+                    }
+                `,
+			duration: "1.5s"
+		},
+		jello: {
+			keyframes: `
+                    @keyframes jello {
+                        0%, 100% { transform: skewX(0) skewY(0); }
+                        25% { transform: skewX(-12deg) skewY(-12deg); }
+                        50% { transform: skewX(6deg) skewY(6deg); }
+                        75% { transform: skewX(-3deg) skewY(-3deg); }
+                    }
+                `,
+			duration: "2s"
+		},
+		swing: {
+			keyframes: `
+                    @keyframes swing {
+                        0%, 100% { transform: rotate(0); }
+                        20% { transform: rotate(15deg); }
+                        40% { transform: rotate(-10deg); }
+                        60% { transform: rotate(5deg); }
+                        80% { transform: rotate(-5deg); }
+                    }
+                `,
+			duration: "1.5s"
+		},
+		rubberBand: {
+			keyframes: `
+                    @keyframes rubberBand {
+                        0% { transform: scale(1); }
+                        30% { transform: scaleX(1.25) scaleY(0.75); }
+                        40% { transform: scaleX(0.75) scaleY(1.25); }
+                        60% { transform: scaleX(1.15) scaleY(0.85); }
+                        100% { transform: scale(1); }
+                    }
+                `,
+			duration: "1.3s"
+		},
+		float: {
+			keyframes: `
+                    @keyframes float {
+                        0%, 100% { transform: translateY(0) rotate(0); }
+                        50% { transform: translateY(-15px) rotate(5deg); }
+                    }
+                `,
+			duration: "3s"
+		},
+		heartBeat: {
+			keyframes: `
+                    @keyframes heartBeat {
+                        0% { transform: scale(1); }
+                        14% { transform: scale(1.3); }
+                        28% { transform: scale(1); }
+                        42% { transform: scale(1.3); }
+                        70% { transform: scale(1); }
+                    }
+                `,
+			duration: "1.3s"
+		},
+		rollIn: {
+			keyframes: `
+                    @keyframes rollIn {
+                        0% { transform: translateX(-100%) rotate(-120deg); }
+                        100% { transform: translateX(0) rotate(0); }
+                    }
+                `,
+			duration: "2s"
+		},
+		dance: {
+			keyframes: `
+                    @keyframes dance {
+                        0%, 100% { transform: rotate(0) translateY(0); }
+                        25% { transform: rotate(10deg) translateY(-10px); }
+                        50% { transform: rotate(0) translateY(0); }
+                        75% { transform: rotate(-10deg) translateY(-10px); }
+                    }
+                `,
+			duration: "1.5s"
+		},
+		twist: {
+			keyframes: `
+                    @keyframes twist {
+                        0%, 100% { transform: rotateY(0); }
+                        50% { transform: rotateY(180deg); }
+                    }
+                `,
+			duration: "2s"
+		},
+		bounce3D: {
+			keyframes: `
+                    @keyframes bounce3D {
+                        0%, 100% { transform: perspective(400px) translateZ(0); }
+                        50% { transform: perspective(400px) translateZ(50px); }
+                    }
+                `,
+			duration: "2s"
+		},
+		zigzag: {
+			keyframes: `
+                    @keyframes zigzag {
+                        0% { transform: translateX(0) translateY(0); }
+                        25% { transform: translateX(10px) translateY(-10px); }
+                        50% { transform: translateX(20px) translateY(0); }
+                        75% { transform: translateX(10px) translateY(10px); }
+                        100% { transform: translateX(0) translateY(0); }
+                    }
+                `,
+			duration: "2s"
+		},
+		wave: {
+			keyframes: `
+                    @keyframes wave {
+                        0%, 100% { transform: skewX(0) translateX(0); }
+                        25% { transform: skewX(15deg) translateX(10px); }
+                        75% { transform: skewX(-15deg) translateX(-10px); }
+                    }
+                `,
+			duration: "2s"
+		},
+		pop: {
+			keyframes: `
+                    @keyframes pop {
+                        0%, 100% { transform: scale(1); }
+                        50% { transform: scale(1.2); opacity: 0.8; }
+                    }
+                `,
+			duration: "0.6s"
+		},
+		shake3D: {
+			keyframes: `
+                    @keyframes shake3D {
+                        0%, 100% { transform: perspective(400px) rotateX(0) rotateY(0); }
+                        25% { transform: perspective(400px) rotateX(15deg) rotateY(15deg); }
+                        75% { transform: perspective(400px) rotateX(-15deg) rotateY(-15deg); }
+                    }
+                `,
+			duration: "2s"
+		}
+	};
+
+	// Add animation styles to document
+	const styleSheet = document.createElement("style");
+	document.head.appendChild(styleSheet);
+	Object.entries(animations).forEach(([name, anim]) => {
+		styleSheet.sheet.insertRule(anim.keyframes, styleSheet.sheet.cssRules.length);
+	});
+
+	// Populate animation dropdown
+	Object.keys(animations).forEach((anim) => {
+		const option = document.createElement("option");
+		option.value = anim;
+		option.textContent = anim.charAt(0).toUpperCase() + anim.slice(1);
+		animationSelect.appendChild(option);
+	});
+
+	// Animation change handler
+	animationSelect.addEventListener("change", (e) => {
+		if (!selectedLetter) return;
+
+		const letterSvg = document.querySelector(`svg[id="${selectedLetter}"]`);
+		const selectedAnim = animations[e.target.value];
+
+		if (selectedAnim) {
+			// Remove any existing animations
+			letterSvg.style.animation = "";
+			// Add new animation
+			letterSvg.style.animation = `${e.target.value} ${selectedAnim.duration} infinite`;
+		}
+	});
+});
+
+function highlightSelectedLetter(selectedBtn) {
+	document.querySelectorAll(".letter-btn").forEach((btn) => {
+		btn.style.transform = btn === selectedBtn ? "scale(1.1)" : "scale(1)";
+		btn.style.boxShadow =
+			btn === selectedBtn ? "0 0 10px rgba(0,0,0,0.2)" : "none";
+	});
+}
+
+// Group animation button functionality
+document.querySelector(".group-btn").addEventListener("click", function () {
+	const letters = document.querySelectorAll("svg.letter");
+
+	// More dynamic group animation keyframes
+	const groupAnimation = `
+            @keyframes groupDance {
+                0% {
+                    transform: translateY(0) scale(1) rotate(0deg);
+                }
+                10% {
+                    transform: translateY(-30px) scale(1.1) rotate(5deg);
+                }
+                20% {
+                    transform: translateY(0) scale(0.95) rotate(0deg);
+                }
+                30% {
+                    transform: translateY(-15px) scale(1.05) rotate(-5deg);
+                }
+                40% {
+                    transform: translateY(0) scale(1) rotate(0deg);
+                }
+                50% {
+                    transform: translateX(-20px) scale(1.1);
+                }
+                60% {
+                    transform: translateX(20px) scale(1.1);
+                }
+                70% {
+                    transform: translateX(0) scale(1) translateY(-10px);
+                }
+                80% {
+                    transform: translateY(0) scale(1.15);
+                }
+                90% {
+                    transform: translateY(-5px) scale(0.95);
+                }
+                100% {
+                    transform: translateY(0) scale(1) rotate(0deg);
+                }
+            }
+
+            @keyframes letterGlow {
+                0%, 100% {
+                    filter: brightness(1);
+                }
+                50% {
+                    filter: brightness(1.3);
+                }
+            }
+
+            @keyframes letterPulse {
+                0%, 100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.7;
+                }
+            }
+        `;
+
+	// Add the animations to the stylesheet
+	const styleSheet = document.createElement("style");
+	styleSheet.textContent = groupAnimation;
+	document.head.appendChild(styleSheet);
+
+	// Apply animations to each letter with cascading effect
+	letters.forEach((letter, index) => {
+		// Store original animation
+		const originalAnimation = letter.style.animation;
+
+		// Combined animations with delays
+		letter.style.animation = `
+                groupDance 3s ease-in-out ${index * 0.15}s,
+                letterGlow 1s ease-in-out ${index * 0.2}s infinite,
+                letterPulse 1.5s ease-in-out ${index * 0.25}s infinite
+            `;
+
+		// Reset to original animation after completion
+		setTimeout(() => {
+			letter.style.animation = originalAnimation;
+		}, 4000); // Increased duration for longer animation
+	});
+
+	// Disable button during animation
+	this.disabled = true;
+	this.textContent = "Playing...";
+
+	setTimeout(() => {
+		this.disabled = false;
+		this.textContent = "Play Group Animation";
+	}, 4500);
+});
+</script>
+</body>
+</html>
