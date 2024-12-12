@@ -1,4 +1,4 @@
-package org.example;
+package ch.eneas.decrypter;
 
 import java.util.HashMap;
 import java.util.Map;
