@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Encryption Help :)",
+  "description": "Helps with encryption and decryption",
+  "version": "1.0",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "js": ["page-script.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
