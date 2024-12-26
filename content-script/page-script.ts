@@ -6,9 +6,13 @@ document.addEventListener("mouseup", (event) => {
         return;
     }
 
-    const selectedText = window.getSelection()?.toString().trim();
-    if (selectedText) {
-        createCustomMenu(event.clientX, event.clientY, selectedText);
+    const selection = window.getSelection();
+    const selectionText = selection?.toString().trim()
+
+    if (selection && selectionText) {
+        const bounds = selection.getRangeAt(0).getBoundingClientRect();
+
+        createCustomMenu(bounds.x, bounds.y+50, selectionText);
     } else {
         removeCustomMenu();
     }
