@@ -1,7 +1,7 @@
 import { ALPHABET_SIZE, FailReasons, isUpperCaseLetter, nextLetter, upperAlphabetLetters } from './utils.js';
 import { Encryptor } from './encryptor.js';
 
-export const CAESAR_ENCRYPTOR_DECRYPTOR: Encryptor = {
+export const CAESAR_ENCRYPTOR: Encryptor = {
     name: ['Substitution', 'Monoalphabetisch', 'Caesar-Methode'],
     format: '[Verschiebung / Schlüssel]: [Plaintext / Verschlüsselter Text]',
     encrypt(text: string,  key?: string): string {

@@ -4,14 +4,13 @@
   "description": "Helps with encryption and decryption",
   "version": "1.0.0",
   "action": {
-    "default_popup": "src/popup/popup.html",
-    "default_icon": "src/popup/icon.png"
+    "default_popup": "popup/popup.html",
+    "default_icon": "popup/icon.png"
   },
   "content_scripts": [
     {
-      "js": ["src/content-script/page-script.ts"],
-      "matches": ["<all_urls>"],
-      "type": "module"
+      "js": ["content-script/content.js"],
+      "matches": ["<all_urls>"]
     }
   ]
 }
