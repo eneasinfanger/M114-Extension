@@ -1,20 +1,19 @@
-import { FailReasons } from './utils.js';
-import { Encryptor } from './encryptor.js';
+import { Encryptor } from '../encryptor.js';
 
-/* Rail Fence Cipher */
-
-export const FENCE_ENCRYPTOR: Encryptor = {
+export const FENCE_ENCRYPTOR: Encryptor<number> = {
     name: ['Transposition', 'Zaunmethode'],
-    format: '[Reihen / Schlüssel]: [Plaintext]',
-    encrypt(text: string, key?: string): string {
-        if (!key) {
-            throw FailReasons.NO_KEY_PROVIDED;
-        }
-        return encryptFence(parseInt(key, 10), text);
+    key: {
+        type: 'integer',
+        parseNumber: true,
+        requiredForEncryption: true,
+        requiredForDecryption: false,
     },
-    decrypt(encryptedText: string, key: string | undefined): string | Map<string | number, string> {
+    encrypt(text: string, key: number): string {
+        return encryptFence(key, text);
+    },
+    decrypt(encryptedText: string, key: number | undefined): string | Map<string | number, string> {
         if (key) {
-            return decryptFence(parseInt(key, 10), encryptedText);
+            return decryptFence(key, encryptedText);
         }
         let results: Map<number, string> = new Map();
         for (let rows = 1; rows <= 15; rows++) {
@@ -89,36 +88,5 @@ function fillZigZag(rows: number, columns: number, callback: (row: number, col: 
         if (row === 0 || row === rows - 1) {
             direction *= -1;
         }
-    }
-}
-
-/* Matrix Cipher */
-
-export const MATRIX_ENCRYPTOR: Encryptor = {
-    name: ['Transposition', 'Matrix'],
-    format: '[Key]: [Plaintext]', // TODO
-    encrypt(text: string, key: string | undefined): string {
-        throw FailReasons.NOT_IMPLEMENTED;
-    },
-    decrypt(encryptedText: string, key: string | undefined): string | string[] | Map<string | number, string> {
-        throw FailReasons.NOT_IMPLEMENTED;
-        // SortedMap<String, String> results = new TreeMap<>();
-        //
-        // String key = "6304918257";
-        //
-        // char[] chars = encryptedText.toCharArray();
-        //
-        // Map<Character, char[]> columns = new HashMap<>();
-        //
-        // int rows = chars.length / key.length();
-        //
-        // key.chars().forEach(ch -> columns.put((char) ch, new char[rows]));
-        //
-        // int idx = 0;
-        // for (int row = 0; row < rows; row++) {
-        //
-        // }
-        //
-        // return results;
     }
 }
