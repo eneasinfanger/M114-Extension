@@ -1,24 +1,24 @@
-## About
+## Über
 
-Chrome Extension with abilities to encrypt and decrypt text.
+Chrome-Erweiterung mit der Möglichkeit, Text zu verschlüsseln und zu entschlüsseln.
 
-## Build
+## Erstellen
 
-Clone the repository and run `npm install` and then `npm run build.win` / `npm run build.linux` in the project's root directory. 
+Klonen Sie das Repository und führen Sie `npm install` und dann `npm run build.win` / `npm run build.linux` im Stammverzeichnis des Projekts aus.
 
-***Included npm scripts:***
+***Enthaltene npm-Skripte:***
 
-1. **clean.win** / **clean.linux**: Delete the `dist` directory if it exists
-2. **compile**: Runs the `build.cjs` file with node, which transpiles the typescript into javascript and bundles it all into `dist/content-script/content.js`.
-3. **copy-assets.win** / **copy-assets.linux**: Copies the remaining extension files, like `manifest.json`, the popup and icons to the `dist` directory.
-4. **build.win** / **build.linux**: Runs the above three scripts in this order.
+1. **clean.win** / **clean.linux**: Löschen Sie das Verzeichnis `dist`, falls es vorhanden ist.
+2. **compile**: Führt die Datei `build.cjs` mit Node aus, wodurch das Typescript in JavaScript transpiliert und alles in `dist/content-script/content.js` gebündelt wird.
+3. **copy-assets.win** / **copy-assets.linux**: Kopiert die verbleibenden Erweiterungsdateien wie `manifest.json`, das Popup und die Symbole in das Verzeichnis `dist`.
+4. **build.win** / **build.linux**: Führt die drei oben genannten Skripte in dieser Reihenfolge aus.
 
-These can be run individually with `npm run <script>`.
+Diese können einzeln mit `npm run <script>` ausgeführt werden.
 
-Files excluded in the copying to the `dist` directory can be adjusted in `exclude-files.txt`.
+Dateien, die beim Kopieren in das `dist`-Verzeichnis ausgeschlossen sind, können in `exclude-files.txt` angepasst werden.
 
-## Usage
+## Verwendung
 
-- Build the extension.
-- Load it into your chrome-browser by visiting `chrome://extensions/`, toggling the "Developer mode" switch in the upper right corner, click the now visible "Load unpacked" button in the top left corner and select the `dist` folder.
-- Select any text on any (non `chrome://` site) and a menu with en-/decryption actions should appear.
+- Erstellen Sie die Erweiterung oder laden Sie die Zip-Datei unter https://github.com/eneasinfanger/M114-Extension/releases/tag/Latest herunter und extrahieren Sie sie.
+- Laden Sie sie in Ihren Chrome-Browser, indem Sie `chrome://extensions/` aufrufen, den Schalter `Entwicklermodus` in der oberen rechten Ecke umschalten, auf die jetzt sichtbare Schaltfläche `Entpackt laden` in der oberen linken Ecke klicken und den Ordner `dist` auswählen.
+- Wählen Sie einen beliebigen Text auf einer beliebigen (nicht `chrome://`-Site) aus und ein Menü mit Ver-/Entschlüsselungsaktionen sollte erscheinen.
