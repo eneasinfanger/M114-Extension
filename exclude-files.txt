@@ -1,0 +1,13 @@
+tsconfig.json
+package.json
+package-lock.json
+node_modules/
+content-script/
+dist/
+.idea/
+.gitignore
+.git/
+build.cjs
+README.md
+copy.bat
+exclude-files.txt

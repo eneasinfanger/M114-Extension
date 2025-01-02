@@ -24,10 +24,13 @@
   },
   "contributors": [],
   "scripts": {
-    "clean": "if exist \"dist\" rmdir /s /q \"dist\"\n",
+    "clean.win": "if exist \"dist\" rmdir /s /q \"dist\"",
+    "clean.linux": "rm -rf dist",
     "compile": "node build.cjs",
-    "copy-assets": "copy.bat",
-    "build": "npm run clean && npm run compile && npm run copy-assets"
+    "copy-assets.win": "copy.bat",
+    "copy-assets.linux": "rsync -av --exclude-from='exclude-files.txt' ./ dist/",
+    "build.win": "npm run clean.win && npm run compile && npm run copy-assets.win",
+    "build.linux": "npm run clean.linux && npm run compile && npm run copy-assets.linux"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.287",

@@ -1,5 +1,18 @@
 @echo off
-robocopy . dist /E /XF tsconfig.json /XF package.json /XF package-lock.json /XD node_modules /XD content-script /XD dist /XD .idea /XF .gitignore /XD .git /XF build.cjs /XF README.md /XF copy.bat
+setlocal enabledelayedexpansion
+
+set command=robocopy . dist /E
+
+for /f "usebackq delims=" %%i in ("exclude-files.txt") do (
+    if "%%~xi"=="" (
+        set command=!command! /XD "%%i"
+    ) else (
+        set command=!command! /XF "%%i"
+    )
+)
+
+rem echo !command!
+!command!
 
 if errorlevel 8 (
   echo Robocopy failed with exit code %errorlevel%
