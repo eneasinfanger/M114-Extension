@@ -6,10 +6,40 @@ import { FENCE_ENCRYPTOR } from './encryption-decryption/transposition/rail-fenc
 import { MATRIX_ENCRYPTOR } from './encryption-decryption/transposition/matrix.js';
 import { POLYALPHABETIC_ENCRYPTOR } from './encryption-decryption/substitution/polyalphabetic.js';
 
+let extensionEnabled: boolean = true;
+
+isExtensionEnabled();
+
+function isExtensionEnabled(): Promise<boolean> {
+    return chrome.storage.local.get('enabled')
+        .then(value => value.enabled || true, _ => true)
+        .then(enabled => extensionEnabled = enabled);
+}
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action !== 'toggleEnabled') {
+        throw new Error(`unexpected enabled action: ${ request.action }`);
+    }
+
+    extensionEnabled = !extensionEnabled;
+    chrome.storage.local.set({ 'enabled': extensionEnabled });
+
+    if (!extensionEnabled) {
+        removeCustomMenu();
+        removeAnchor();
+    }
+
+    sendResponse(extensionEnabled);
+});
+
 let selectionAnchor: HTMLSpanElement | null = null;
 let placedMenu: HTMLDivElement | null = null;
 
 document.addEventListener('mouseup', (event) => {
+    if (!extensionEnabled) {
+        return;
+    }
+
     if (placedMenu && placedMenu.contains(event.target as Node | null)) { // clicked in menu
         return;
     }
@@ -22,7 +52,7 @@ document.addEventListener('mouseup', (event) => {
 
     const selectionText = selection?.toString().trim();
 
-    if (placedMenu || !selection || !selectionText) { // clicked outside of existing menu or no selection / empty selection was made
+    if (placedMenu || !selection || !selectionText || !selection.rangeCount) { // clicked outside of existing menu or no selection / empty selection was made
         removeCustomMenu();
         removeAnchor();
         return;
@@ -47,8 +77,13 @@ document.addEventListener('mouseup', (event) => {
 });
 
 document.addEventListener('mousedown', (event) => {
+    if (!extensionEnabled) {
+        return;
+    }
+
     const selection = window.getSelection();
-    if (selection && isClickWithinRect(event, selection?.getRangeAt(0).getBoundingClientRect()!)) { // clicked within current selection
+    if (selection && selection.rangeCount && isClickWithinRect(event, selection?.getRangeAt(0)
+        .getBoundingClientRect()!)) { // clicked within current selection
         return;
     }
     if (placedMenu && !placedMenu.contains(event.target as Node | null)) {
@@ -57,7 +92,7 @@ document.addEventListener('mousedown', (event) => {
     }
 });
 
-function isClickWithinRect(event:MouseEvent, rect:DOMRect) {
+function isClickWithinRect(event: MouseEvent, rect: DOMRect) {
     const { clientX, clientY } = event;
     const { left, top, right, bottom } = rect;
 
@@ -67,6 +102,10 @@ function isClickWithinRect(event:MouseEvent, rect:DOMRect) {
 document.addEventListener('scroll', updateMenuPosition, true);
 
 function updateMenuPosition() {
+    if (!extensionEnabled) {
+        return;
+    }
+
     if (!selectionAnchor || !placedMenu) {
         return;
     }

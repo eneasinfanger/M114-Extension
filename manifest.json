@@ -12,5 +12,14 @@
       "js": ["content-script/content.js"],
       "matches": ["<all_urls>"]
     }
-  ]
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "icons": {
+    "16": "popup/icon.png",
+    "32": "popup/icon.png",
+    "48": "popup/icon.png",
+    "128": "popup/icon.png"
+  }
 }
