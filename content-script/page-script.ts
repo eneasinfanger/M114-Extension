@@ -14,40 +14,20 @@ chrome.runtime.onMessage.addListener((enabled, _sender, _sendResponse) => {
     if (!enabled) {
         removeCustomMenu();
         removeAnchor();
+    } else {
+        const selection = window.getSelection();
+        const selectionText = selection?.toString().trim();
+
+        if (selection && selectionText && selection.rangeCount) {
+            createAnchorWithMenu(selection, selectionText);
+        }
     }
 });
 
 let selectionAnchor: HTMLSpanElement | null = null;
 let placedMenu: HTMLDivElement | null = null;
 
-document.addEventListener('mouseup', (event) => {
-    console.log("mouseup");
-    if (!extensionEnabled) {
-        console.log("extension not enabled");
-        return;
-    }
-
-    if (placedMenu && placedMenu.contains(event.target as Node | null)) { // clicked in menu
-        console.log("clicked in menu");
-        return;
-    }
-
-    const selection = window.getSelection();
-
-    if (placedMenu && placedMenu.contains(selection?.anchorNode || null)) { // selection in menu
-        console.log("selection in menu");
-        return;
-    }
-
-    const selectionText = selection?.toString().trim();
-
-    if (placedMenu || !selection || !selectionText || !selection.rangeCount) { // clicked outside of existing menu or no selection / empty selection was made
-        console.log(placedMenu ? "clicked outside of existing menu": "no selection / empty selection was made");
-        removeCustomMenu();
-        removeAnchor();
-        return;
-    }
-
+function createAnchorWithMenu(selection: Selection, selectionText: string) {
     const range = selection.getRangeAt(0);
 
     selectionAnchor = document.createElement('span');
@@ -64,8 +44,32 @@ document.addEventListener('mouseup', (event) => {
 
     createCustomMenu(bounds.x, bounds.y + 50, selectionText);
     updateMenuPosition();
+}
 
-    console.log("created menu");
+document.addEventListener('mouseup', (event) => {
+    if (!extensionEnabled) {
+        return;
+    }
+
+    if (placedMenu && placedMenu.contains(event.target as Node | null)) { // clicked in menu
+        return;
+    }
+
+    const selection = window.getSelection();
+
+    if (placedMenu && placedMenu.contains(selection?.anchorNode || null)) { // selection in menu
+        return;
+    }
+
+    const selectionText = selection?.toString().trim();
+
+    if (placedMenu || !selection || !selectionText || !selection.rangeCount) { // clicked outside of existing menu or no selection / empty selection was made
+        removeCustomMenu();
+        removeAnchor();
+        return;
+    }
+
+    createAnchorWithMenu(selection, selectionText);
 });
 
 document.addEventListener('mousedown', (event) => {
