@@ -25,12 +25,12 @@
   "contributors": [],
   "scripts": {
     "clean.win": "if exist \"dist\" rmdir /s /q \"dist\"",
-    "clean.linux": "rm -rf dist",
+    "clean.linux": "rm -rf dist; rm -rf dist.zip",
     "compile": "node build.cjs",
     "copy-assets.win": "copy.bat",
     "copy-assets.linux": "rsync -av --exclude-from='exclude-files.txt' ./ dist/",
-    "build.win": "npm run clean.win && npm run compile && npm run copy-assets.win",
-    "build.linux": "npm run clean.linux && npm run compile && npm run copy-assets.linux"
+    "build.win": "npm run clean.win && npm run compile && npm run copy-assets.win && tar -caf dist.zip dist",
+    "build.linux": "npm run clean.linux && npm run compile && npm run copy-assets.linux && zip -r dist.zip dist"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.287",

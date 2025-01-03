@@ -11,7 +11,7 @@ Clone the repository and run `npm install` and then `npm run build.win` / `npm r
 1. **clean.win** / **clean.linux**: Delete the `dist` directory if it exists
 2. **compile**: Runs the `build.cjs` file with node, which transpiles the typescript into javascript and bundles it all into `dist/content-script/content.js`.
 3. **copy-assets.win** / **copy-assets.linux**: Copies the remaining extension files, like `manifest.json`, the popup and icons to the `dist` directory.
-4. **build.win** / **build.linux**: Runs the above three scripts in this order.
+4. **build.win** / **build.linux**: Runs the above three scripts in this order and then zips the `dist` directory into a `dist.zip` file.
 
 These can be run individually with `npm run <script>`.
 

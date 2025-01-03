@@ -6,15 +6,15 @@ import { FENCE_ENCRYPTOR } from './encryption-decryption/transposition/rail-fenc
 import { MATRIX_ENCRYPTOR } from './encryption-decryption/transposition/matrix.js';
 import { POLYALPHABETIC_ENCRYPTOR } from './encryption-decryption/substitution/polyalphabetic.js';
 
-let extensionEnabled = true;
+let extensionEnabled = false;
 
 chrome.runtime.onMessage.addListener((enabled, _sender, _sendResponse) => {
     extensionEnabled = enabled;
-    
+
     if (!enabled) {
         removeCustomMenu();
         removeAnchor();
-    } else {
+    } else if (!placedMenu) {
         const selection = window.getSelection();
         const selectionText = selection?.toString().trim();
 

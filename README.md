@@ -11,7 +11,7 @@ Klonen Sie das Repository und führen Sie `npm install` und dann `npm run build.
 1. **clean.win** / **clean.linux**: Löschen Sie das Verzeichnis `dist`, falls es vorhanden ist.
 2. **compile**: Führt die Datei `build.cjs` mit Node aus, wodurch das Typescript in JavaScript transpiliert und alles in `dist/content-script/content.js` gebündelt wird.
 3. **copy-assets.win** / **copy-assets.linux**: Kopiert die verbleibenden Erweiterungsdateien wie `manifest.json`, das Popup und die Symbole in das Verzeichnis `dist`.
-4. **build.win** / **build.linux**: Führt die drei oben genannten Skripte in dieser Reihenfolge aus.
+4. **build.win** / **build.linux**: Führt die drei oben genannten Skripte in dieser Reihenfolge aus und komprimiert das `dist`-Verzeichnis in eine Zip-Datei.
 
 Diese können einzeln mit `npm run <script>` ausgeführt werden.
 

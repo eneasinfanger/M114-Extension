@@ -12,3 +12,4 @@ README.md
 copy.bat
 exclude-files.txt
 README2.md
+dist.zip
