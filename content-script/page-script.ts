@@ -6,53 +6,43 @@ import { FENCE_ENCRYPTOR } from './encryption-decryption/transposition/rail-fenc
 import { MATRIX_ENCRYPTOR } from './encryption-decryption/transposition/matrix.js';
 import { POLYALPHABETIC_ENCRYPTOR } from './encryption-decryption/substitution/polyalphabetic.js';
 
-let extensionEnabled: boolean = true;
+let extensionEnabled = true;
 
-isExtensionEnabled();
-
-function isExtensionEnabled(): Promise<boolean> {
-    return chrome.storage.local.get('enabled')
-        .then(value => value.enabled || true, _ => true)
-        .then(enabled => extensionEnabled = enabled);
-}
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action !== 'toggleEnabled') {
-        throw new Error(`unexpected enabled action: ${ request.action }`);
-    }
-
-    extensionEnabled = !extensionEnabled;
-    chrome.storage.local.set({ 'enabled': extensionEnabled });
-
-    if (!extensionEnabled) {
+chrome.runtime.onMessage.addListener((enabled, _sender, _sendResponse) => {
+    extensionEnabled = enabled;
+    
+    if (!enabled) {
         removeCustomMenu();
         removeAnchor();
     }
-
-    sendResponse(extensionEnabled);
 });
 
 let selectionAnchor: HTMLSpanElement | null = null;
 let placedMenu: HTMLDivElement | null = null;
 
 document.addEventListener('mouseup', (event) => {
+    console.log("mouseup");
     if (!extensionEnabled) {
+        console.log("extension not enabled");
         return;
     }
 
     if (placedMenu && placedMenu.contains(event.target as Node | null)) { // clicked in menu
+        console.log("clicked in menu");
         return;
     }
 
     const selection = window.getSelection();
 
     if (placedMenu && placedMenu.contains(selection?.anchorNode || null)) { // selection in menu
+        console.log("selection in menu");
         return;
     }
 
     const selectionText = selection?.toString().trim();
 
     if (placedMenu || !selection || !selectionText || !selection.rangeCount) { // clicked outside of existing menu or no selection / empty selection was made
+        console.log(placedMenu ? "clicked outside of existing menu": "no selection / empty selection was made");
         removeCustomMenu();
         removeAnchor();
         return;
@@ -74,6 +64,8 @@ document.addEventListener('mouseup', (event) => {
 
     createCustomMenu(bounds.x, bounds.y + 50, selectionText);
     updateMenuPosition();
+
+    console.log("created menu");
 });
 
 document.addEventListener('mousedown', (event) => {
@@ -81,23 +73,11 @@ document.addEventListener('mousedown', (event) => {
         return;
     }
 
-    const selection = window.getSelection();
-    if (selection && selection.rangeCount && isClickWithinRect(event, selection?.getRangeAt(0)
-        .getBoundingClientRect()!)) { // clicked within current selection
-        return;
-    }
     if (placedMenu && !placedMenu.contains(event.target as Node | null)) {
         removeCustomMenu();
         removeAnchor();
     }
 });
-
-function isClickWithinRect(event: MouseEvent, rect: DOMRect) {
-    const { clientX, clientY } = event;
-    const { left, top, right, bottom } = rect;
-
-    return clientX >= left && clientX <= right && clientY >= top && clientY <= bottom;
-}
 
 document.addEventListener('scroll', updateMenuPosition, true);
 
@@ -133,6 +113,7 @@ function createCustomMenu(x: number, y: number, text: string) {
     const title = document.createElement('h4');
     title.textContent = 'Entschlüsseln / Verschlüsseln';
     title.style.marginBottom = '10px';
+    title.style.color = 'white';
     placedMenu.appendChild(title);
 
     const message = document.createElement('div');

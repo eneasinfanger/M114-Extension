@@ -20,5 +20,6 @@ Files excluded in the copying to the `dist` directory can be adjusted in `exclud
 ## Usage
 
 - Build the extension or download zip on https://github.com/eneasinfanger/M114-Extension/releases/tag/Latest and extract it.
-- Load it into your chrome-browser by visiting `chrome://extensions/`, toggling the "Developer mode" switch in the upper right corner, click the now visible "Load unpacked" button in the top left corner and select the `dist` folder.
+- Load it into your chrome-browser by visiting [`chrome://extensions/`](chrome://extensions/), toggling the "Developer mode" switch in the upper right corner, click the now visible "Load unpacked" button in the top left corner and select the `dist` folder.
 - Select any text on any (non `chrome://` site) and a menu with en-/decryption actions should appear.
+- The extension can be de-/activated by clicking the icon in the top right corner of the browser or pressing `CTRL`+`B` (can be changed on [`chrome://extensions/shortcuts`](chrome://extensions/shortcuts)).

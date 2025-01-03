@@ -20,5 +20,6 @@ Dateien, die beim Kopieren in das `dist`-Verzeichnis ausgeschlossen sind, könne
 ## Verwendung
 
 - Erstellen Sie die Erweiterung oder laden Sie die Zip-Datei unter https://github.com/eneasinfanger/M114-Extension/releases/tag/Latest herunter und extrahieren Sie sie.
-- Laden Sie sie in Ihren Chrome-Browser, indem Sie `chrome://extensions/` aufrufen, den Schalter `Entwicklermodus` in der oberen rechten Ecke umschalten, auf die jetzt sichtbare Schaltfläche `Entpackt laden` in der oberen linken Ecke klicken und den Ordner `dist` auswählen.
-- Wählen Sie einen beliebigen Text auf einer beliebigen (nicht `chrome://`-Site) aus und ein Menü mit Ver-/Entschlüsselungsaktionen sollte erscheinen.
+- Laden Sie sie in Ihren Chrome-Browser, indem Sie [`chrome://extensions/`](chrome://extensions/) aufrufen, den Schalter „Entwicklermodus“ in der oberen rechten Ecke umschalten, auf die jetzt sichtbare Schaltfläche „Entpackt laden“ in der oberen linken Ecke klicken und den Ordner `dist` auswählen.
+- Wählen Sie einen beliebigen Text auf einer beliebigen (nicht `chrome://`-Seite) aus. Ein Menü mit Aktionen zum Ver-/Entschlüsseln sollte angezeigt werden.
+- Die Erweiterung kann durch Klicken auf das Symbol in der oberen rechten Ecke des Browsers oder durch Drücken von `STRG`+`B` de-/aktiviert werden (kann unter [`chrome://extensions/shortcuts`](chrome://extensions/shortcuts) geändert werden).

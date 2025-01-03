@@ -4,8 +4,7 @@
   "description": "Helps with encryption and decryption",
   "version": "1.0.0",
   "action": {
-    "default_popup": "popup/popup.html",
-    "default_icon": "popup/icon.png"
+    "default_icon": "icon.png"
   },
   "content_scripts": [
     {
@@ -14,12 +13,23 @@
     }
   ],
   "permissions": [
-    "storage"
+    "activeTab", "tabs"
   ],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+B",
+        "mac": "Command+B"
+      }
+    }
+  },
+  "background": {
+    "service_worker": "background/background.js"
+  },
   "icons": {
-    "16": "popup/icon.png",
-    "32": "popup/icon.png",
-    "48": "popup/icon.png",
-    "128": "popup/icon.png"
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
   }
 }
